@@ -1,16 +1,16 @@
 package org.userway.selenium.manual;
 
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.levelci.selenium.AccessibilityAuditor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.levelci.selenium.AccessibilityAuditor;
-import org.levelci.selenium.model.config.AnalysisConfig;
-import org.levelci.selenium.model.config.AuditConfig;
 import org.userway.selenium.levelci.LevelSetup;
-
-import java.io.File;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,6 +29,13 @@ public class ManualScanTest {
         driver = new ChromeDriver(options);
     }
 
+    @AfterEach
+    void captureLevelCiReport() {
+        var auditConfig = LevelSetup.getAuditConfig(driver);
+        var result = AccessibilityAuditor.levelAnalyze(auditConfig);
+        assertThat(result.getError()).isNull();
+    }
+
     @AfterAll
     @SneakyThrows
     public static void teardown() {
@@ -41,19 +48,5 @@ public class ManualScanTest {
     @DisplayName("Should scan page and save Level CI scope report")
     void shouldScanPageAndSaveReport() {
         driver.get("https://www.w3.org/WAI/test-evaluate/preliminary/#images");
-
-        var analysisConfig = AnalysisConfig.builder()
-                .reportPath(LevelSetup.REPORTS_PATH)
-                .build();
-
-        var auditConfig = AuditConfig.builder()
-                .driver(driver)
-                .analysisConfiguration(analysisConfig)
-                .saveReport(true)
-                .build();
-
-        var result = AccessibilityAuditor.levelAnalyze(auditConfig);
-
-        assertThat(result.getError()).isNull();
     }
 }
