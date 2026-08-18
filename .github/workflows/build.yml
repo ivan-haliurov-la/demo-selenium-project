@@ -35,4 +35,4 @@ jobs:
         env:
           LEVEL_CI_TOKEN: ${{ secrets.LEVEL_CI_TOKEN }}
         with:
-          config_path: level-ci/level-ci.config.ts
+          config_path: ./level-ci/level-ci.config.ts
