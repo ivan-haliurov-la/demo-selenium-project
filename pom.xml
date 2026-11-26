@@ -24,6 +24,13 @@
     </properties>
 
     <dependencies>
+    <!-- pom.xml -->
+        <dependency>
+        <groupId>org.levelci</groupId>
+        <artifactId>a11y-selenium-java</artifactId>
+        <version>0.2.5</version>
+        <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -40,12 +47,6 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.levelci</groupId>
-            <artifactId>a11y-selenium-java</artifactId>
-            <version>0.2.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -101,7 +102,7 @@
     <repositories>
         <repository>
             <id>level-access-level-ci</id>
-            <url>https://dl.levelaccess.net/${env.CLOUDSMITH_TOKEN}/level-ci/maven/</url>
+            <url>https://dl.levelaccess.net/p0Glz2mVoV4Ac7kS/level-ci/maven/</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
