@@ -1,0 +1,20 @@
+image: node:22
+
+definitions:
+  steps:
+    - step: &level-ci-accessibility
+        name: Level CI Accessibility
+        script:
+          - npm ci
+          - npm run test:e2e
+          - pipe: levelaccess/level-ci-bitbucket:1.4.9-alpha-20261109134936
+            variables:
+              LEVEL_CI_TOKEN: $LEVEL_CI_TOKEN
+
+pipelines:
+  branches:
+    main:
+      - step: *level-ci-accessibility
+  pull-requests:
+    '**':
+      - step: *level-ci-accessibility
