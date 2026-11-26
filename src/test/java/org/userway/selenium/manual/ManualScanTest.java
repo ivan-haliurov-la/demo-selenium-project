@@ -47,6 +47,6 @@ public class ManualScanTest {
     @Test
     @DisplayName("Should scan page and save Level CI scope report")
     void shouldScanPageAndSaveReport() {
-        driver.get("https://www.w3.org/WAI/test-evaluate/preliminary/#images");
+        driver.get("https://www.w3.org/WAI/test-evaluate/easy-checks/image-alt/");
     }
 }
